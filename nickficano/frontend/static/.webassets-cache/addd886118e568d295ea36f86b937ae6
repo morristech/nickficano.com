@@ -1,0 +1,45 @@
+/** reset **/
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+code,
+del,
+em,
+img,
+small,
+strong,
+ol,
+ul,
+li,
+label,
+table {
+  border: 0;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+body {
+  position: relative;
+  font: normal 15px/28px 'Merriweather', Georgia, serif;
+}
+h1 {
+  font-style: normal;
+  font-size: 45px;
+  font-weight: normal;
+}
+p {
+  margin: 25px 0;
+}

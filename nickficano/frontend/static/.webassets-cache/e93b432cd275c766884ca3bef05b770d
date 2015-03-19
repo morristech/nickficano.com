@@ -1,0 +1,53 @@
+/** reset **/
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+code,
+del,
+em,
+img,
+small,
+strong,
+ol,
+ul,
+li,
+label,
+table {
+  border: 0;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: 'FranklinITCProThin';
+  src: url(../font/FranklinITCProThin.eot);
+  src: url(../font/FranklinITCProThin.eot?#iefix) format('embedded-opentype'), url(../font/FranklinITCProThin.woff) format('woff'), url(../font/FranklinITCProThin.ttf) format('truetype'), url(../font/FranklinITCProThin.svg#CreativeBlockBBBold) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  position: relative;
+  font: normal 15px/28px 'Merriweather', Georgia, serif;
+}
+h1 {
+  font-style: normal;
+  font-size: 45px;
+  font-weight: normal;
+  font-family: 'FranklinITCProThin', helvetica neue, Arial, sans-serif;
+}
+p {
+  margin: 25px 0;
+}

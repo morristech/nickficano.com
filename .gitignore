@@ -1,0 +1,17 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+/resources
+nickficano/web/static/.webassets-cache/
+nickficano/web/static/css/*
+src/static/build
+assets/*
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
