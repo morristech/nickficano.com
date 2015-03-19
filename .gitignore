@@ -3,8 +3,8 @@
 .LSOverride
 Icon
 /resources
-nickficano/web/static/.webassets-cache/
-nickficano/web/static/css/*
+nickficano/frontend/static/.webassets-cache/
+nickficano/frontend/static/css/*
 src/static/build
 assets/*
 
