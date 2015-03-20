@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template
-
+# -*- coding: utf-8 -*-
+from flask import Blueprint
+from flask import render_template as tpl
 from . import route
 
 bp = Blueprint('index', __name__)
@@ -7,5 +8,4 @@ bp = Blueprint('index', __name__)
 
 @route(bp, '/')
 def index():
-    """Returns the dashboard interface."""
-    return render_template('index.j2')
+    return tpl('index.j2')
