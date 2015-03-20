@@ -1,6 +1,6 @@
+# -*- coding: utf-8 -*-
 import pkgutil
 import importlib
-
 from flask import Blueprint
 
 
@@ -8,9 +8,12 @@ def register_blueprints(app, package_name, package_path):
     """Register all Blueprint instances on the specified Flask application
     found in all modules for the specified package.
 
-    :param app: the Flask application
-    :param package_name: the package name
-    :param package_path: the package path
+    :param app:
+        the Flask application
+    :param package_name:
+        the package name
+    :param package_path:
+        the package path
     """
     rv = []
     for _, name, _ in pkgutil.iter_modules(package_path):
