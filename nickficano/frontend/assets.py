@@ -1,7 +1,7 @@
-from flask.ext.assets import Environment, Bundle
+# -*- coding: utf-8 -*-
+from flask.ext.assets import Bundle
+from flask.ext.assets import Environment
 
-
-#: application css bundle
 css_all = Bundle("scss/all.scss", depends=["**/*.scss"], filters="pyscss",
                  output="css/all.css", debug=True)
 
