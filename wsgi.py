@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
+from werkzeug.wsgi import DispatcherMiddleware
 from nickficano import frontend
 
-application = frontend.create_app()
-
-if __name__ == "__main__":
-    application.run()
+application = DispatcherMiddleware(frontend.create_app())
