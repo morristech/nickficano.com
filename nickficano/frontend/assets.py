@@ -2,8 +2,11 @@
 from flask.ext.assets import Bundle
 from flask.ext.assets import Environment
 
-css_all = Bundle("scss/all.scss", depends=["**/*.scss"], filters="pyscss",
-                 output="css/all.css", debug=True)
+css_all = Bundle("scss/all.scss",
+                 depends=["**/*.scss"],
+                 filters="pyscss,cssmin",
+                 output="css/all.css",
+                 debug=True)
 
 
 def init_app(app):
