@@ -3,9 +3,7 @@ from fabric.api import cd
 from fabric.api import env
 from fabric.api import sudo
 
-env.hosts = [
-  'nickficano.com',
-]
+env.hosts = ['nickficano.com']
 env.use_ssh_config = True
 
 
