@@ -12,7 +12,7 @@ setup(
     name='nickficano',
     author='Nick Ficano',
     author_email='nficano@gmail.com',
-    version='0.0.1',
+    version='0.1.0',
     packages=find_packages(exclude=['tests*']),
     url='http://nickficano.com',
     license='Apache License 2.0',
