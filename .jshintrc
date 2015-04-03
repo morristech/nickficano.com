@@ -1,20 +1,18 @@
 {
   "globals": {
     "$": false,
-    "_": false,
-    "nf": false,
-    "Backbone": false
+    "_": false
   },
   "browser": true,
-  "devel": true,
-  "maxcomplexity": 7,
   "curly": false,
+  "devel": true,
   "eqeqeq": true,
   "indent": 4,
+  "maxcomplexity": 7,
+  "maxdepth": 4,
   "newcap": true,
+  "trailing": true,
   "undef": true,
   "unused": true,
-  "trailing": true,
-  "maxdepth": 4,
   "white": false
 }
