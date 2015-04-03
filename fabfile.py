@@ -1,5 +1,5 @@
-from __future__ import absolute_import
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from contextlib import contextmanager
 from fabric.api import cd
 from fabric.api import env

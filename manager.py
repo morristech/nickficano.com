@@ -1,5 +1,5 @@
-from __future__ import absolute_import
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from flask.ext.script import Server
 from flask.ext.script import Manager
 from nickficano.frontend import create_app

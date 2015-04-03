@@ -1,6 +1,6 @@
-from __future__ import absolute_import
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
 from setuptools import setup, find_packages
 
 pip_requirements = []
