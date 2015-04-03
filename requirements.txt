@@ -9,7 +9,6 @@ Werkzeug==0.10.1
 cssmin==0.2.0
 ecdsa==0.13
 enum34==1.0.4
-gnureadline==6.3.3
 ipython==3.0.0
 itsdangerous==0.24
 paramiko==1.15.2
