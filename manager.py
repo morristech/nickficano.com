@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask.ext.script import Server, Manager
-
+from flask.ext.script import Server
+from flask.ext.script import Manager
 from nickficano.frontend import create_app
 
 manager = Manager(create_app())

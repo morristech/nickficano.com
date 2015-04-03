@@ -1,8 +1,6 @@
+# -*- coding: utf-8 -*-
 from functools import wraps
-
 from flask import render_template
-
-
 from .. import factory
 from . import assets
 
