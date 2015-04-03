@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask.ext.script import Server, Manager
 
 from nickficano.frontend import create_app
