@@ -9,18 +9,24 @@ from fabric.api import sudo
 env.hosts = ['nickficano.com']
 # Use authentication information stored in `~/.ssh/config`.
 env.use_ssh_config = True
+# TODO: Replace hardcoded paths with setting variables.
 
 
 @contextmanager
 def virtualenv(name):
-    with prefix("workon {}".format(name)):
-        yield
+    """Handy context manager to activate a virtualenv.
+    """
+    with prefix('WORKON_HOME=$HOME/.virtualenvs'):
+        with prefix('source /usr/local/bin/virtualenvwrapper.sh'):
+            with prefix("workon {}".format(name)):
+                yield
 
 
 def deploy():
-    """Deploy updates to production.
+    """Deploy updates to "production".
     """
     git_pull()
+    pip_update()
     restart_uwsgi()
 
 
@@ -37,8 +43,9 @@ def restart_uwsgi():
   sudo("supervisorctl restart www_uwsgi")
 
 
-def update_dependencies():
-    """Ensure all pip dependencies are up-to-date.
+def pip_update():
+    """Ensure all pip dependencies are up-to-date (or at least sync w/
+    `requirements.txt`).
     """
     with virtualenv("nickficano.com"):
         with cd('~/nickficano.com/app'):
