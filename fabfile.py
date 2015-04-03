@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # -*- coding: utf-8 -*-
 from contextlib import contextmanager
 from fabric.api import cd
