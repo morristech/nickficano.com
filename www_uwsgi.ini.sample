@@ -1,0 +1,15 @@
+[uwsgi]
+uid = 33
+gid = 33
+module = wsgi
+callable = application
+master = true
+chmod-socket = 666
+processes = 1
+virtualenv = /home/ubuntu/.virtualenvs/nickficano.com
+pythonpath = /home/ubuntu/nickficano.com/app
+pidfile = /home/ubuntu/nickficano.com/.www_uwsgi.pid
+socket = /home/ubuntu/nickficano.com/.www_uwsgi.sock
+vacuum = true
+logdate = true
+die-on-term = true
