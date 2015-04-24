@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 from functools import wraps
 from flask import render_template
+from flask.ext.cdn import CDN
 from .. import factory
 from . import assets
 
@@ -13,6 +14,8 @@ def create_app(settings_override=None):
 
     # Init assets
     assets.init_app(app)
+
+    CDN(app)
 
     # Register custom error handlers
     if not app.debug:
