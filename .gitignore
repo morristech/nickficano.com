@@ -6,6 +6,7 @@ Icon
 /resources
 nickficano/frontend/static/.webassets-cache/
 nickficano/frontend/static/css/*
+nickficano/overrides.py
 src/static/build
 assets/*
 
