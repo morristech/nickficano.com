@@ -9,7 +9,7 @@ def create_app(package_name, package_path, settings_override=None):
 
     app.config.from_object('nickficano.settings')
     app.config.from_object(settings_override)
-
+    app.config.from_pyfile('overrides.py', silent=True)
     register_blueprints(app, package_name, package_path)
 
     return app
