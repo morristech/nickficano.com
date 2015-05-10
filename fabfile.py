@@ -34,16 +34,16 @@ def deploy():
 
 
 def git_pull():
-  """Pull the latest version of the codebase.
-  """
-  with cd('~/nickficano.com/app'):
-      sudo('git pull origin master', user='www-data')
+    """Pull the latest version of the codebase.
+    """
+    with cd('~/nickficano.com/app'):
+        sudo('git pull origin master', user='www-data')
 
 
 def restart_uwsgi():
-  """Gracefully restart uwsgi.
-  """
-  sudo("supervisorctl restart www_uwsgi")
+      """Gracefully restart uwsgi.
+      """
+      sudo("supervisorctl restart www_uwsgi")
 
 
 def pip_update():
