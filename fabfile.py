@@ -28,7 +28,7 @@ def deploy():
     """Deploy updates to "production".
     """
     git_pull()
-    sync_overrides()
+    update_overrides()
     pip_update()
     restart_uwsgi()
 
@@ -55,7 +55,7 @@ def pip_update():
             run("pip install --ignore-installed -r requirements.txt")
 
 
-def sync_overrides():
+def update_overrides():
     """Copies overrides.py to remote host.
     """
     with cd('/tmp'):
