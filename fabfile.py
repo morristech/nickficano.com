@@ -6,6 +6,7 @@ from fabric.api import env
 from fabric.api import prefix
 from fabric.api import run
 from fabric.api import sudo
+from fabric.api import put
 
 env.hosts = ['nickficano.com']
 # Use authentication information stored in `~/.ssh/config`.
@@ -27,6 +28,7 @@ def deploy():
     """Deploy updates to "production".
     """
     git_pull()
+    sync_overrides()
     pip_update()
     restart_uwsgi()
 
@@ -51,3 +53,13 @@ def pip_update():
     with virtualenv("nickficano.com"):
         with cd('~/nickficano.com/app'):
             run("pip install --ignore-installed -r requirements.txt")
+
+
+def sync_overrides():
+    """Copies overrides.py to remote host.
+    """
+    with cd('/tmp'):
+        put('nickficano/overrides.py', 'overrides.py')
+        sudo('chown www-data:www-data overrides.py')
+        sudo('mv overrides.py ~/nickficano.com/app/nickficano',
+             user='www-data')
