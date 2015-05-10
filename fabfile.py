@@ -4,9 +4,9 @@ from contextlib import contextmanager
 from fabric.api import cd
 from fabric.api import env
 from fabric.api import prefix
+from fabric.api import put
 from fabric.api import run
 from fabric.api import sudo
-from fabric.api import put
 
 env.hosts = ['nickficano.com']
 # Use authentication information stored in `~/.ssh/config`.
