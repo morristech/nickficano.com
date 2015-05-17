@@ -41,9 +41,9 @@ def git_pull():
 
 
 def restart_uwsgi():
-      """Gracefully restart uwsgi.
-      """
-      sudo("supervisorctl restart www_uwsgi")
+    """Gracefully restart uwsgi.
+    """
+    sudo("supervisorctl restart www_uwsgi")
 
 
 def pip_update():
