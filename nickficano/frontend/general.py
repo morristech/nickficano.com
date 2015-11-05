@@ -26,7 +26,7 @@ def virtualenv(name):
                 yield
 
 
-@route(bp, '/webhooks/github/gendo/', methods=('GET', 'POST',))
+@route(bp, '/gendo', methods=('GET', 'POST',))
 def gendo_webhook():
     with cd('~/gendo/'):
         sudo('git pull origin master', user='ubuntu')
