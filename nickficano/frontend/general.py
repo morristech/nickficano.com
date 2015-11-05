@@ -35,3 +35,4 @@ def gendo_webhook():
         with cd('~/gendo/'):
             run("pip install --ignore-installed -r requirements.txt")
     sudo("supervisorctl restart gendobot")
+    return "OK"
