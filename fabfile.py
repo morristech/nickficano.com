@@ -38,6 +38,10 @@ def deploy_gendo():
     """
     with cd('~/gendo/'):
         sudo('git pull origin master', user='ubuntu')
+
+    with virtualenv("gendo"):
+        with cd('~/gendo/'):
+            run("pip install --ignore-installed -r requirements.txt")
     sudo("supervisorctl restart gendobot")
 
 
