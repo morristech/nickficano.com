@@ -33,6 +33,14 @@ def deploy():
     restart_uwsgi()
 
 
+def deploy_gendo():
+    """Pull the latest version of the gendo codebase.
+    """
+    with cd('~/gendo/'):
+        sudo('git pull origin master', user='ubuntu')
+    sudo("supervisorctl restart gendobot")
+
+
 def git_pull():
     """Pull the latest version of the codebase.
     """
