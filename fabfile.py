@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from contextlib import contextmanager
-from fabric.api import cd
-from fabric.api import env
-from fabric.api import prefix
-from fabric.api import put
-from fabric.api import run
-from fabric.api import sudo
+from fabric.api import cd, env, prefix, put, run, sudo
 
 env.hosts = ['nickficano.com']
 # Use authentication information stored in `~/.ssh/config`.
@@ -20,7 +15,7 @@ def virtualenv(name):
     """
     with prefix('WORKON_HOME=$HOME/.virtualenvs'):
         with prefix('source /usr/local/bin/virtualenvwrapper.sh'):
-            with prefix("workon {}".format(name)):
+            with prefix("workon {0}".format(name)):
                 yield
 
 
