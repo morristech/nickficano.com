@@ -11,8 +11,7 @@ env.use_ssh_config = True
 
 @contextmanager
 def virtualenv(name):
-    """Handy context manager to activate a virtualenv.
-    """
+    """Handy context manager to activate a virtualenv."""
     with prefix('WORKON_HOME=$HOME/.virtualenvs'):
         with prefix('source /usr/local/bin/virtualenvwrapper.sh'):
             with prefix("workon {0}".format(name)):
@@ -20,8 +19,7 @@ def virtualenv(name):
 
 
 def deploy():
-    """Deploy updates to "production".
-    """
+    """Deploy updates to production."""
     git_pull()
     update_overrides()
     pip_update()
@@ -29,8 +27,7 @@ def deploy():
 
 
 def deploy_gendo():
-    """Pull the latest version of the gendo codebase.
-    """
+    """Pull the latest version of the gendo codebase."""
     with cd('~/gendo/'):
         sudo('git pull origin master', user='ubuntu')
 
@@ -41,15 +38,13 @@ def deploy_gendo():
 
 
 def git_pull():
-    """Pull the latest version of the codebase.
-    """
+    """Pull the latest version of the codebase."""
     with cd('~/nickficano.com/app'):
         sudo('git pull origin master', user='www-data')
 
 
 def restart_uwsgi():
-    """Gracefully restart uwsgi.
-    """
+    """Gracefully restart uwsgi."""
     sudo("supervisorctl restart www_uwsgi")
 
 
@@ -63,8 +58,7 @@ def pip_update():
 
 
 def update_overrides():
-    """Copies overrides.py to remote host.
-    """
+    """Copies overrides.py to remote host."""
     with cd('/tmp'):
         put('nickficano/overrides.py', 'overrides.py')
         sudo('chown www-data:www-data overrides.py')
