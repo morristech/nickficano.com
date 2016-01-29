@@ -26,15 +26,15 @@ def deploy():
     restart_uwsgi()
 
 
-def deploy_gendo():
+def deploy_diglet():
     """Pull the latest version of the gendo codebase."""
-    with cd('~/gendo/'):
+    with cd('~/diglet/'):
         sudo('git pull origin master', user='ubuntu')
 
-    with virtualenv("gendo"):
-        with cd('~/gendo/'):
+    with virtualenv("diglet"):
+        with cd('~/diglet/'):
             run("pip install --ignore-installed -r requirements.txt")
-    sudo("supervisorctl restart gendobot")
+    sudo("supervisorctl restart digletbot")
 
 
 def git_pull():
@@ -63,4 +63,4 @@ def update_overrides():
         put('nickficano/overrides.py', 'overrides.py')
         sudo('chown www-data:www-data overrides.py')
         sudo('mv overrides.py ~/nickficano.com/app/nickficano',
-             user='www-data')
+            user='www-data')
