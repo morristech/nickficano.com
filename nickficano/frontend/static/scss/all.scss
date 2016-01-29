@@ -23,10 +23,24 @@ body {
   line-height: 1.42857;
 }
 
+.wrap {
+}
+
+.wrap:before {
+    background-image: url('https://themeathouseblog.files.wordpress.com/2012/03/bbq-ribs_31259767.jpg');
+   opacity: .4;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  content: "";
+}
+
 .content {
   position: relative;
-  margin: 30px auto;
-  padding: 0 30px;
+  padding: 30px;
   min-height: initial;
 }
 
