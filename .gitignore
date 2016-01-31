@@ -9,7 +9,7 @@ nickficano/frontend/static/css/*
 nickficano/overrides.py
 src/static/build
 assets/*
-
+certs/*
 
 # Thumbnails
 ._*
