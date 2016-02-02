@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 from contextlib import contextmanager
-from fabric.api import cd, env, prefix, put, run, sudo
+from fabric.api import cd, env, prefix, put, run, sudo, local
 
 env.hosts = ['nickficano.com']
 # Use authentication information stored in `~/.ssh/config`.
@@ -64,3 +64,8 @@ def update_overrides():
         sudo('chown www-data:www-data overrides.py')
         sudo('mv overrides.py ~/nickficano.com/app/nickficano',
             user='www-data')
+
+
+def regenerate_ssl_certs():
+    local("openssl genrsa 4096 > account.key")
+    local("openssl genrsa 4096 > domain.key")

@@ -1,17 +1,15 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="description" content="Hello, I'm Nick. I write code. " />
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Nick Ficano</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, minimal-ui" />
+    <title>Nick Ficano — NYC Full Stack Developer</title>
     {% assets "css_all" %}
     <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
     <link rel="icon" href="/static/images/favicon.ico" />
-  {% endassets %}
   </head>
   <body>
     {% block content %}{% endblock %}
