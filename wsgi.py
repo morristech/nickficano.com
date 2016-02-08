@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
-from werkzeug.serving import run_simple
 from werkzeug.wsgi import DispatcherMiddleware
 from nickficano import frontend, api
 
+# This is the entry point for callable or entry point function for uwsgi. See:
+# http://uwsgi-docs.readthedocs.org/en/latest/WSGIquickstart.html#deploying-flask
 application = DispatcherMiddleware(frontend.create_app(), {
     '/apis': api.create_app()
 })
-
-if __name__ == "__main__":
-    run_simple('0.0.0.0', 5000, application, use_reloader=True,
-               use_debugger=True)
