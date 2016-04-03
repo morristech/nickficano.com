@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 import pkgutil
 import importlib
+from datetime import datetime
 from flask import Blueprint
 from flask.json import JSONEncoder as BaseJSONEncoder
 
@@ -66,4 +67,12 @@ class JSONEncoder(BaseJSONEncoder):
     def default(self, obj):
         if isinstance(obj, JsonSerializer):
             return obj.to_json()
+        try:
+            if isinstance(obj, datetime):
+                return obj.isoformat()
+            iterable = iter(obj)
+        except TypeError:
+            pass
+        else:
+            return list(iterable)
         return super(JSONEncoder, self).default(obj)
