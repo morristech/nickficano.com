@@ -37,6 +37,17 @@ def deploy_diglet():
     sudo("supervisorctl restart digletbot")
 
 
+def deploy_sc():
+    """Pull the latest version of the gendo codebase."""
+    with cd('~/simplecontactsbot/'):
+        sudo('git pull origin master', user='ubuntu')
+
+    with virtualenv("simplecontactsbot"):
+        with cd('~/simplecontactsbot/'):
+            run("pip install --ignore-installed -r requirements.txt")
+    sudo("supervisorctl restart simplecontactsbot")
+
+
 def git_pull():
     """Pull the latest version of the codebase."""
     with cd('~/nickficano.com/app'):
