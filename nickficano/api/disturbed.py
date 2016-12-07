@@ -3,10 +3,10 @@ from flask import Blueprint
 import requests
 
 
-bp = Blueprint('disturbed', __name__, url_prefix='/the-sickness')
+bp = Blueprint('disturbed', __name__, url_prefix='/down/with')
 
 
-@route(bp, '/the-sickness')
+@route(bp, '/the/sickness')
 def down_with_the_sickness():
     url = ('http://api.bandsintown.com/artists/Disturbed/events.json?'
            'api_version=2.0&app_id=js_www.disturbed1.com&extended=true'
