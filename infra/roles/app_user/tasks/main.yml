@@ -1,0 +1,14 @@
+---
+- name: Ensure app group is created
+  group: name=apps state=present
+
+- name: Ensure app user is created
+  user: name=app group=apps createhome=yes
+
+- name: Add .ssh folder
+  file:
+    path: /home/app/.ssh
+    owner: app
+    group: apps
+    state: directory
+    mode: 0700

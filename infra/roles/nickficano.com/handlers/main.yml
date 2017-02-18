@@ -1,0 +1,6 @@
+---
+  - name: restart nickficano.com
+    supervisorctl:
+      name: nf_www
+      state: restarted
+    become: yes

@@ -1,0 +1,17 @@
+---
+- hosts: nickficano.com
+  become: yes
+  gather_facts: False
+
+  pre_tasks:
+    - name: install python 2.x
+      raw: sudo bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qy python-minimal)"
+
+    - name: install aptitude
+      raw: sudo apt-get -y install aptitude
+
+  roles:
+    - base
+    - nginx
+    - supervisord
+    - nickficano.com

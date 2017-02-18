@@ -1,0 +1,57 @@
+---
+  - name: install python packages
+    apt: name={{ item }} update_cache=yes
+    with_items:
+      - build-essential
+      - libffi-dev
+      - libssl-dev
+      - python-dev
+      - python-setuptools
+
+  - name: Install pip
+    easy_install: name=pip
+
+  - name: Install virtualenv
+    pip: name=virtualenv
+
+  - name: Deploy from github
+    become: yes
+    become_user: app
+    git:
+      repo=https://github.com/nficano/nickficano.com.git
+      dest=/home/app/nickficano.com
+      accept_hostkey=yes
+
+  - name: Initiate virtualenv
+    pip: virtualenv=/home/app/.virtualenvs/nickficano.com
+         requirements=/home/app/nickficano.com/requirements.txt
+
+  - name: Uwsgi config dir
+    file:
+      path=/etc/uwsgi
+      state=directory
+      mode=0755
+
+  - name: Uwsgi config
+    template:
+      src: templates/uwsgi.ini
+      dest: /etc/uwsgi/nf_www.ini
+
+  - name: write the supervisor template
+    template:
+      src: templates/supervisor.ini
+      dest: /etc/supervisor/nf_www.ini
+
+  - name: Restart app
+    supervisorctl:
+      name: nf_uwsgi
+      state: restarted
+    become: yes
+
+  - name: nginx config
+    template:
+      src: templates/nginx.conf
+      dest: /etc/nginx/conf.d/nickficano.com.conf
+    become: yes
+    notify:
+      - reload nginx
