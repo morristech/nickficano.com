@@ -1,4 +1,5 @@
 ---
+# file: roles/common/tasks/main.yml
 
 - name: add public keys from github
   authorized_key: user=ubuntu key=https://github.com/{{ item }}.keys

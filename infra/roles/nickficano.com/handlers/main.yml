@@ -1,6 +1,8 @@
 ---
-  - name: restart app process
-    supervisorctl:
-      name: nf_www
-      state: restarted
-    become: yes
+# file: roles/nickficano.com/handles/main.yml
+
+- name: restart app process
+  supervisorctl:
+    name: nf_www
+    state: restarted
+  become: yes

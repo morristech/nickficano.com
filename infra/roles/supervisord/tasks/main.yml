@@ -2,11 +2,11 @@
   apt:
     name: python-setuptools
 
-- name: Install pip
+- name: install pip
   easy_install:
     name: pip
 
-- name: pypi packages to run a site
+- name: install
   pip:
     name: "{{ item }}"
     state: latest

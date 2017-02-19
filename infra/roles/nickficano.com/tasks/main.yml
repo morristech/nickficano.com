@@ -1,56 +1,64 @@
 ---
-  - name: install python packages
-    apt: name={{ item }} state=installed update_cache=yes
-    with_items:
-      - build-essential
-      - libffi-dev
-      - libssl-dev
-      - python-dev
-      - python-setuptools
+# file: roles/nickficano.com/tasks/main.yml
 
-  - name: install pip
-    easy_install:
-      name: pip
+- name: install python packages
+  apt: name={{ item }} state=installed update_cache=yes
+  with_items:
+    - build-essential
+    - libffi-dev
+    - libssl-dev
+    - python-dev
+    - python-setuptools
 
-  - name: install virtualenv
-    pip:
-      name: virtualenv
+- name: install pip
+  easy_install:
+    name: pip
 
-  - name: pull latest app code from github
-    become: yes
-    become_user: "{{ app.user }}"
-    git:
-      repo: "{{ app.repo_url }}"
-      dest: /home/{{ app.user }}/{{ app.name }}
-      accept_hostkey: yes
+- name: install virtualenv
+  pip:
+    name: virtualenv
 
-  - name: install pip requirements
-    pip:
-      virtualenv: /home/{{ app.user }}/.virtualenvs/{{ app.name }}
-      requirements: /home/{{ app.user }}/{{ app.name }}/requirements.txt
+- name: pull latest app code from github
+  become: yes
+  become_user: "{{ app.user }}"
+  git:
+    repo: "{{ app.repo_url }}"
+    dest: /home/{{ app.user }}/{{ app.name }}
+    accept_hostkey: yes
+  tags:
+    deploy
 
-  - name: create uwsgi config directory
-    file:
-      path: /etc/uwsgi
-      state: directory
-      mode: 0755
+- name: install pip requirements
+  pip:
+    virtualenv: /home/{{ app.user }}/.virtualenvs/{{ app.name }}
+    requirements: /home/{{ app.user }}/{{ app.name }}/requirements.txt
+  tags:
+    deploy
 
-  - name: write uwsgi configuration
-    template:
-      src: templates/uwsgi.ini
-      dest: /etc/uwsgi/nf_www.ini
+- name: create uwsgi config directory
+  file:
+    path: /etc/uwsgi
+    state: directory
+    mode: 0755
 
-  - name: write supervisor configuration
-    template:
-      src: templates/supervisor.ini
-      dest: /etc/supervisor/nf_www.ini
-    notify:
-      - restart app process
+- name: write uwsgi configuration
+  template:
+    src: templates/uwsgi.ini
+    dest: /etc/uwsgi/nf_www.ini
 
-  - name: write nginx site configuration
-    template:
-      src: templates/nginx.conf
-      dest: /etc/nginx/conf.d/{{ app.name }}.conf
-    become: yes
-    notify:
-      - reload nginx
+- name: write supervisor configuration
+  template:
+    src: templates/supervisor.ini
+    dest: /etc/supervisor/nf_www.ini
+  notify:
+    - restart app process
+
+- name: write nginx site configuration
+  template:
+    src: templates/nginx.conf
+    dest: /etc/nginx/conf.d/{{ app.name }}.conf
+  become: yes
+  notify:
+    - reload nginx
+  tags:
+    deploy

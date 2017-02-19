@@ -1,4 +1,6 @@
 ---
+# file: host_vars/nickficano.com.yml
+
 app:
   name: nickficano.com
   repo_url: https://github.com/nficano/nickficano.com.git

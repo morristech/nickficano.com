@@ -1,4 +1,5 @@
 ---
+# file: roles/letsencrypt/tasks/main.yml
 
 - name: install dependancies
   apt: name={{ item }} update_cache=yes state=latest
@@ -19,7 +20,7 @@
   pip:
     name: virtualenv
 
-- name: install python dependancies
+- name: install prerequisites
   pip:
     virtualenv: "{{ letsencrypt_venv }}"
     virtualenv_site_packages: no
@@ -60,7 +61,7 @@
   args:
     creates: /etc/letsencrypt/live/{{ letsencrypt_cert_domains[0] }}
 
-- name: fix the renewal file
+- name: update renewal configuration
   ini_file:
     section: renewalparams
     option: "{{ item.key }}"
@@ -75,7 +76,7 @@
     hsts: False
     authenticator: '{{ letsencrypt_authenticator }}'
 
-- name: fix the webroot map in the renewal file
+- name: update renewal configuration webroot map
   ini_file:
     section: "[webroot_map]"
     option: "{{ item }}"
@@ -84,7 +85,7 @@
   become: yes
   with_items: "{{ letsencrypt_cert_domains }}"
 
-- name: install cert renewal cron job
+- name: write renewal cronjob
   become: yes
   cron:
     name: "Let's Encrypt Renewal"
@@ -93,7 +94,7 @@
     minute: "{{ letsencrypt_renewal_frequency.minute }}"
     job: "{{ letsencrypt_venv }}/bin/letsencrypt renew --quiet {{ letsencrypt_renewal_command_args }}"
 
-- name: install ssl site snippet
+- name: add ssl configuration snippet for nginx
   template:
     src: templates/nginx_ssl_snippet.conf
     dest: /etc/nginx/snippets/ssl-{{ app.name }}.conf
@@ -101,7 +102,7 @@
   notify:
     - reload nginx
 
-- name: install ssl params snippet
+- name: install ssl dhparams configuration snippet for nginx
   template:
     src: templates/nginx_ssl_params.conf
     dest: /etc/nginx/snippets/ssl-params.conf

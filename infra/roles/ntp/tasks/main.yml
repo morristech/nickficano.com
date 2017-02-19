@@ -1,10 +1,12 @@
 ---
-  - name: install ntp daemon
-    apt: pkg=ntp state=present
+# file: roles/ntp/tasks/main.yml
 
-  - name: ensure ntp daemon autostart
-    service: name=ntp enabled=yes
+- name: install ntp daemon
+  apt: pkg=ntp state=present
 
-  - name: setup ntp config
-    template: src=templates/ntp.conf dest=/etc/ntp.conf
-    notify: Restart NTP daemon
+- name: ensure ntp daemon autostart
+  service: name=ntp enabled=yes
+
+- name: setup ntp config
+  template: src=templates/ntp.conf dest=/etc/ntp.conf
+  notify: Restart NTP daemon

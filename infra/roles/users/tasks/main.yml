@@ -1,16 +1,18 @@
 ---
-- name: ensure user groups exist
+# file: roles/users/tasks/main.yml
+
+- name: upsert groups
   group:
     name: "{{ app.group }}"
     state: present
 
-- name: ensure users exist
+- name: upsert users
   user:
     name: "{{ app.user }}"
     group: "{{ app.group }}"
     createhome: yes
 
-- name: Add .ssh folder
+- name: add .ssh folder
   file:
     path: /home/{{ app.user }}/.ssh
     owner: "{{ app.user }}"

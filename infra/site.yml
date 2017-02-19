@@ -1,4 +1,6 @@
 ---
+# file: site.yml
+
 - hosts: nickficano.com
   become: yes
   gather_facts: False
@@ -11,7 +13,7 @@
       raw: sudo apt-get -y install aptitude
 
   roles:
-    - base
+    - common
     - ntp
     - nginx
     - supervisord
