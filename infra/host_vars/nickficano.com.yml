@@ -7,6 +7,7 @@ app:
   user: app
   group: apps
   process_name: nf_www
+  deploy_user: ubuntu
 
 letsencrypt_webroot_path: /var/www/html
 letsencrypt_email: nficano@gmail.com

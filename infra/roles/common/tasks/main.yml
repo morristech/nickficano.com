@@ -2,7 +2,7 @@
 # file: roles/common/tasks/main.yml
 
 - name: add public keys from github
-  authorized_key: user=ubuntu key=https://github.com/{{ item }}.keys
+  authorized_key: user={{ app.deploy_user }} key=https://github.com/{{ item }}.keys
   with_items:
     - nficano
 
@@ -22,5 +22,5 @@
 - name: write .inputrc
   template:
     src: templates/inputrc
-    dest: ~/.inputrc
+    dest: /home/{{ app.deploy_user }}/.inputrc
 
