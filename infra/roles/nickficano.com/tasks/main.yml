@@ -1,7 +1,7 @@
 ---
 # file: roles/nickficano.com/tasks/main.yml
 
-- name: install python packages
+- name: install python build packages
   apt: name={{ item }} state=installed update_cache=yes
   with_items:
     - build-essential
@@ -18,7 +18,7 @@
   pip:
     name: virtualenv
 
-- name: pull latest app code from github
+- name: pull latest app updates from github
   become: yes
   become_user: "{{ app.user }}"
   git:
@@ -35,7 +35,7 @@
   tags:
     deploy
 
-- name: create uwsgi config directory
+- name: create directory for uwsgi process configuration
   file:
     path: /etc/uwsgi
     state: directory

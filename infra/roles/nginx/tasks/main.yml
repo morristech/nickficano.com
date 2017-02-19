@@ -6,7 +6,7 @@
     url: http://nginx.org/keys/nginx_signing.key
     state: present
 
-- name: updating apt cache
+- name: update apt cache
   apt:
     update_cache: yes
 

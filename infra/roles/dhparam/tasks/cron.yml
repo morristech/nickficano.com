@@ -1,7 +1,7 @@
 ---
 # file: roles/dhparam/tasks/cron.yml
 
-- name: install cron to update the diffie-hellman
+- name: write cron for auto-regenerating dhparams
   cron:
     name: "Diffie-Hellman parameter update"
     job: "{{ dhparam_openssl_binary }} dhparam -out '{{ dhparam_file }}' {{ dhparam_size }}"
