@@ -25,6 +25,13 @@
   notify:
     - reload nginx
 
+- name: create nginx snippets directory
+  file:
+    path: /etc/nginx/snippets
+    state: directory
+    follow: yes
+  become: yes
+
 - name: start nginx
   service:
     name: nginx

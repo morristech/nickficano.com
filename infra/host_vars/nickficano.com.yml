@@ -12,7 +12,7 @@ letsencrypt_cert_domains:
   - nickficano.com
   - www.nickficano.com
 
-dhparam_size: 4096
+dhparam_size: 2048
 dhparam_file: /etc/ssl/certs/dhparam-{{dhparam_size}}.pem
 dhparam_update_enabled: false
 dhparam_update_interval: weekly

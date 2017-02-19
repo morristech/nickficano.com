@@ -7,8 +7,6 @@
     update_cache: yes
     cache_valid_time: 3600
   become: yes
-  tags:
-    - dhparam
 
 - name: create output directory for dhparam
   file:
@@ -23,7 +21,5 @@
   args:
     creates: "{{ dhparam_file }}"
   become: yes
-  tags:
-    - dhparam
 
 - include: cron.yml

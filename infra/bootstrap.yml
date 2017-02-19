@@ -4,17 +4,17 @@
   gather_facts: False
 
   pre_tasks:
-    - name: install python 2
+    - name: install python2
       raw: sudo bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qy python-minimal)"
 
     - name: install aptitude
       raw: sudo apt-get -y install aptitude
 
   roles:
-    # - base
-    # - ntp
-    # - nginx
-    # - supervisord
-    # - nickficano.com
-    # - letsencrypt
+    - base
+    - ntp
+    - nginx
+    - supervisord
+    - nickficano.com
+    - letsencrypt
     - dhparam
