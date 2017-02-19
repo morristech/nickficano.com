@@ -1,0 +1,19 @@
+---
+- name: ensure user groups exist
+  group:
+    name: "{{ app.group }}"
+    state: present
+
+- name: ensure users exist
+  user:
+    name: "{{ app.user }}"
+    group: "{{ app.group }}"
+    createhome: yes
+
+- name: Add .ssh folder
+  file:
+    path: /home/{{ app.user }}/.ssh
+    owner: "{{ app.user }}"
+    group: "{{ app.group }}"
+    state: directory
+    mode: 0700

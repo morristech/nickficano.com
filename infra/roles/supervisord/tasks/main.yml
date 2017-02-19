@@ -1,21 +1,25 @@
 - name: install python-setuptools
-  apt: name=python-setuptools
+  apt:
+    name: python-setuptools
 
 - name: Install pip
-  easy_install: name=pip
+  easy_install:
+    name: pip
 
-- name: PyPI packages to run a site
-  pip: name={{ item }} state=latest
+- name: pypi packages to run a site
+  pip:
+    name: "{{ item }}"
+    state: latest
   with_items:
     - supervisor
 
-- name: create config folder
+- name: create supervisor config folder
   file:
     dest: /etc/supervisor
     state: directory
     owner: root
 
-- name: create config
+- name: write the supervisor base template
   template:
     src: templates/supervisord.conf
     dest: /etc/supervisor/supervisord.conf

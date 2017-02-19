@@ -1,6 +1,6 @@
 ---
   - name: install python packages
-    apt: name={{ item }} update_cache=yes
+    apt: name={{ item }} state=installed update_cache=yes
     with_items:
       - build-essential
       - libffi-dev
@@ -8,50 +8,49 @@
       - python-dev
       - python-setuptools
 
-  - name: Install pip
-    easy_install: name=pip
+  - name: install pip
+    easy_install:
+      name: pip
 
-  - name: Install virtualenv
-    pip: name=virtualenv
+  - name: install virtualenv
+    pip:
+      name: virtualenv
 
-  - name: Deploy from github
+  - name: pull latest app code from github
     become: yes
-    become_user: app
+    become_user: "{{ app.user }}"
     git:
-      repo=https://github.com/nficano/nickficano.com.git
-      dest=/home/app/nickficano.com
-      accept_hostkey=yes
+      repo: "{{ app.repo_url }}"
+      dest: /home/{{ app.user }}/{{ app.name }}
+      accept_hostkey: yes
 
-  - name: Initiate virtualenv
-    pip: virtualenv=/home/app/.virtualenvs/nickficano.com
-         requirements=/home/app/nickficano.com/requirements.txt
+  - name: install pip requirements
+    pip:
+      virtualenv: /home/{{ app.user }}/.virtualenvs/{{ app.name }}
+      requirements: /home/{{ app.user }}/{{ app.name }}/requirements.txt
 
-  - name: Uwsgi config dir
+  - name: create uwsgi config directory
     file:
-      path=/etc/uwsgi
-      state=directory
-      mode=0755
+      path: /etc/uwsgi
+      state: directory
+      mode: 0755
 
-  - name: Uwsgi config
+  - name: write uwsgi configuration
     template:
       src: templates/uwsgi.ini
       dest: /etc/uwsgi/nf_www.ini
 
-  - name: write the supervisor template
+  - name: write supervisor configuration
     template:
       src: templates/supervisor.ini
       dest: /etc/supervisor/nf_www.ini
+    notify:
+      - restart app process
 
-  - name: Restart app
-    supervisorctl:
-      name: nf_uwsgi
-      state: restarted
-    become: yes
-
-  - name: nginx config
+  - name: write nginx site configuration
     template:
       src: templates/nginx.conf
-      dest: /etc/nginx/conf.d/nickficano.com.conf
+      dest: /etc/nginx/conf.d/{{ app.name }}.conf
     become: yes
     notify:
       - reload nginx

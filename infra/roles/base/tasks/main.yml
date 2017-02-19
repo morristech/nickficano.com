@@ -1,21 +1,19 @@
 ---
 
-- name: Add pubkeys of admin users
+- name: add public keys from github
   authorized_key: user=ubuntu key=https://github.com/{{ item }}.keys
   with_items:
     - nficano
 
-- name: Update apt-get packages
+- name: update apt-get packages
   apt: >
     update_cache=yes
     cache_valid_time=3600
 
-- name: Upgrade apt-get packages
+- name: upgrade apt-get packages
   apt: upgrade=yes
 
-- name: install packages
+- name: install some of them packages
   apt: name={{ item }} update_cache=yes state=latest
   with_items:
     - git-core
-
-- include: 'tasks/ntp.yml'
