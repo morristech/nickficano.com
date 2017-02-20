@@ -15,10 +15,14 @@
     - ca-certificates
     - python-pip
     - git
+  tags:
+    - letsencrypt
 
 - name: install virtualenv
   pip:
     name: virtualenv
+  tags:
+    - letsencrypt
 
 - name: install prerequisites
   pip:
@@ -31,6 +35,8 @@
   with_items:
     - setuptools
     - pip
+  tags:
+    - letsencrypt
 
 - name: install letsencrypt
   pip:
@@ -39,6 +45,8 @@
     name: letsencrypt
     state: latest
   become: yes
+  tags:
+    - letsencrypt
 
 - name: create webroot directory
   file:
@@ -46,6 +54,8 @@
     state: directory
     follow: yes
   become: yes
+  tags:
+    - letsencrypt
 
 - name: attempt to get cert via webroot authenticator
   command: "{{ letsencrypt_command }} -a webroot --webroot-path {{ letsencrypt_webroot_path }} certonly"
@@ -54,12 +64,16 @@
     creates: /etc/letsencrypt/live/{{ letsencrypt_cert_domains[0] }}
   when: letsencrypt_authenticator == "webroot"
   ignore_errors: True
+  tags:
+    - letsencrypt
 
 - name: attempt to get cert via standalone authenticator
-  command: "{{ letsencrypt_command }} -a standalone auth {{ letsencrypt_standalone_command_args }}"
+  command: "{{ letsencrypt_command }} -a standalone auth"
   become: yes
   args:
     creates: /etc/letsencrypt/live/{{ letsencrypt_cert_domains[0] }}
+  tags:
+    - letsencrypt
 
 - name: update renewal configuration
   ini_file:
@@ -75,6 +89,8 @@
     uir: False
     hsts: False
     authenticator: '{{ letsencrypt_authenticator }}'
+  tags:
+    - letsencrypt
 
 - name: update renewal configuration webroot map
   ini_file:
@@ -84,15 +100,18 @@
     dest: /etc/letsencrypt/renewal/{{ letsencrypt_cert_domains[0] }}.conf
   become: yes
   with_items: "{{ letsencrypt_cert_domains }}"
+  tags:
+    - letsencrypt
 
 - name: write cron for ssl cert auto-renewal
   become: yes
   cron:
     name: "Let's Encrypt Renewal"
-    day: "{{ letsencrypt_renewal_frequency.day }}"
-    hour: "{{ letsencrypt_renewal_frequency.hour }}"
-    minute: "{{ letsencrypt_renewal_frequency.minute }}"
-    job: "{{ letsencrypt_venv }}/bin/letsencrypt renew --quiet {{ letsencrypt_renewal_command_args }}"
+    special_time: "{{ letsencrypt_renewal_frequency }}"
+    job: "{{ letsencrypt_venv }}/bin/letsencrypt renew --quiet"
+    state: "{{ 'present' if letsencrypt_renewal_enabled else 'absent' }}"
+  tags:
+    - letsencrypt
 
 - name: write ssl configuration snippet for nginx
   template:
@@ -101,6 +120,8 @@
   become: yes
   notify:
     - reload nginx
+  tags:
+    - letsencrypt
 
 - name: write ssl dhparams configuration snippet for nginx
   template:
@@ -109,3 +130,5 @@
   become: yes
   notify:
     - reload nginx
+  tags:
+    - letsencrypt
