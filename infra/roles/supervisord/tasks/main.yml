@@ -22,7 +22,13 @@
     state: directory
     owner: root
 
-- name: write supervisor base template
+- name: create supervisor process configuration directory
+  file:
+    dest: /etc/supervisor/conf.d
+    state: directory
+    owner: root
+
+- name: write supervisor main configuration
   template:
     src: templates/supervisord.conf
     dest: /etc/supervisor/supervisord.conf

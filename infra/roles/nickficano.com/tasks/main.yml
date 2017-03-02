@@ -49,7 +49,7 @@
 - name: write supervisor configuration
   template:
     src: templates/supervisor.ini
-    dest: /etc/supervisor/nf_www.ini
+    dest: /etc/supervisor/conf.d/nf_www.ini
   notify:
     - restart app process
 
