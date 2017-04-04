@@ -53,6 +53,7 @@
     path: "{{ letsencrypt_webroot_path }}"
     state: directory
     follow: yes
+    mode: 0755
   become: yes
   tags:
     - letsencrypt
