@@ -35,6 +35,12 @@
   tags:
     deploy
 
+- name: create directory for letsencrypt auto renewal verification
+  file:
+    path: /var/www/html/.well-known/acme-challenge
+    state: directory
+    mode: 0755
+
 - name: create directory for uwsgi process configuration
   file:
     path: /etc/uwsgi
