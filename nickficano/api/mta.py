@@ -3,7 +3,7 @@ from flask import Blueprint, abort, request
 import os
 import requests
 import xmltodict
-from mta_realtime import MtaSanitizer
+from .mta_realtime import MtaSanitizer
 from . import route
 
 bp = Blueprint('mta', __name__, url_prefix='/mta')

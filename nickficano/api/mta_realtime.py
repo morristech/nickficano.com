@@ -1,5 +1,5 @@
-import gtfs_realtime_pb2
-import urllib2
+from . import gtfs_realtime_pb2
+import urllib.request, urllib.error, urllib.parse
 import contextlib
 import datetime
 import copy
@@ -44,7 +44,6 @@ class MtaSanitizer(object):
                     station['id'] = idx
 
         except IOError:
-            print 'Couldn\'t load stations file ' + stations_file
             exit()
 
         self._update()
@@ -68,7 +67,7 @@ class MtaSanitizer(object):
     def _build_stops_index(stations):
         stops = {}
         for station in stations:
-            for stop_id in station['stops'].keys():
+            for stop_id in list(station['stops'].keys()):
                 stops[stop_id] = station
 
         return stops
@@ -107,12 +106,12 @@ class MtaSanitizer(object):
         for i, feed_url in enumerate(feed_urls):
             mta_data = gtfs_realtime_pb2.FeedMessage()
             try:
-                with contextlib.closing(urllib2.urlopen(feed_url)) as r:
+                with contextlib.closing(urllib.request.urlopen(feed_url)) as r:
                     data = r.read()
                     mta_data.ParseFromString(data)
 
             except (
-                    urllib2.URLError,
+                    urllib.error.URLError,
                     google.protobuf.message.DecodeError
             ) as e:
                 self.logger.error('Couldn\'t connect to MTA server: ' + str(e))
@@ -151,7 +150,7 @@ class MtaSanitizer(object):
                         station['routes'].add(route_id)
                         try:
                             routes[route_id].add(stop_id)
-                        except KeyError, e:
+                        except KeyError as e:
                             routes[route_id] = set([stop_id])
 
         # sort by time
@@ -186,7 +185,7 @@ class MtaSanitizer(object):
         return sortable_stations[:limit]
 
     def get_routes(self):
-        return self._routes.keys()
+        return list(self._routes.keys())
 
     def get_by_route(self, route):
         if self.is_expired():
