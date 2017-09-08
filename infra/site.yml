@@ -17,6 +17,8 @@
     - common
     - ntp
     - nginx
+    - python
+    - uwsgi
     - supervisord
     - nickficano.com
     - letsencrypt
