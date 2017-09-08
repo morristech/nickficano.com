@@ -17,6 +17,7 @@
 - name: install virtualenv
   pip:
     name: virtualenv
+    virtualenv_python: python3.6
 
 - name: pull latest app updates from github
   become: yes
@@ -31,6 +32,7 @@
 - name: install pip requirements
   pip:
     virtualenv: /home/{{ app.user }}/.virtualenvs/{{ app.name }}
+    virtualenv_python: python3.6
     requirements: /home/{{ app.user }}/{{ app.name }}/requirements.txt
   tags:
     deploy
@@ -51,6 +53,8 @@
   template:
     src: templates/uwsgi.ini
     dest: /etc/uwsgi/nf_www.ini
+  tags:
+    deploy
 
 - name: write supervisor configuration
   template:
