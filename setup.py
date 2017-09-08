@@ -1,12 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
-from setuptools import setup, find_packages
+
+from setuptools import find_packages
+from setuptools import setup
 
 pip_requirements = []
 for line in open('requirements.txt').readlines():
     li = line.strip()
-    if not li.startswith("#"):
+    if not li.startswith('#'):
         pip_requirements.append(line)
 
 setup(
@@ -19,5 +21,5 @@ setup(
     license='Apache License 2.0',
     description='My landing page',
     zip_safe=False,
-    install_requires=pip_requirements
+    install_requires=pip_requirements,
 )

@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import (render_template as T, current_app as app,
-                   request, send_from_directory, Blueprint)
+from flask import Blueprint
+from flask import current_app as app
+from flask import render_template as T
+from flask import request
+from flask import send_from_directory
+
 from . import route
 
 bp = Blueprint('index', __name__)

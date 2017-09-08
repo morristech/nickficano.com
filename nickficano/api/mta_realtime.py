@@ -1,16 +1,20 @@
-from . import gtfs_realtime_pb2
-import urllib.request, urllib.error, urllib.parse
 import contextlib
-import datetime
 import copy
-from operator import itemgetter
-from pytz import timezone
-import threading
-import time
-import math
+import datetime
 import json
 import logging
+import math
+import threading
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from operator import itemgetter
+
 import google.protobuf.message
+from pytz import timezone
+
+from . import gtfs_realtime_pb2
 
 
 def distance(p1, p2):
@@ -22,8 +26,10 @@ class MtaSanitizer(object):
     _LOCK_TIMEOUT = 300
     _tz = timezone('US/Eastern')
 
-    def __init__(self, key, stations_file, expires_seconds=None, max_trains=10,
-                 max_minutes=30, threaded=False):
+    def __init__(
+        self, key, stations_file, expires_seconds=None, max_trains=10,
+        max_minutes=30, threaded=False,
+    ):
         self._KEY = key
         self._MAX_TRAINS = max_trains
         self._MAX_MINUTES = max_minutes
@@ -100,7 +106,7 @@ class MtaSanitizer(object):
 
         feed_urls = [
             'http://datamine.mta.info/mta_esi.php?feed_id=1&key=' + self._KEY,
-            'http://datamine.mta.info/mta_esi.php?feed_id=2&key=' + self._KEY
+            'http://datamine.mta.info/mta_esi.php?feed_id=2&key=' + self._KEY,
         ]
 
         for i, feed_url in enumerate(feed_urls):
@@ -112,16 +118,18 @@ class MtaSanitizer(object):
 
             except (
                     urllib.error.URLError,
-                    google.protobuf.message.DecodeError
+                    google.protobuf.message.DecodeError,
             ) as e:
                 self.logger.error('Couldn\'t connect to MTA server: ' + str(e))
                 self._update_lock.release()
                 return
 
             self._last_update = datetime.datetime.fromtimestamp(
-                mta_data.header.timestamp, self._tz)
+                mta_data.header.timestamp, self._tz,
+            )
             self._MAX_TIME = self._last_update + datetime.timedelta(
-                minutes=self._MAX_MINUTES)
+                minutes=self._MAX_MINUTES,
+            )
 
             for entity in mta_data.entity:
                 if entity.trip_update:
@@ -144,7 +152,7 @@ class MtaSanitizer(object):
 
                         station[direction].append({
                             'route': route_id,
-                            'time': time
+                            'time': time,
                         })
 
                         station['routes'].add(route_id)
@@ -158,9 +166,11 @@ class MtaSanitizer(object):
             if station['S'] or station['N']:
                 station['hasData'] = True
                 station['S'] = sorted(
-                    station['S'], key=itemgetter('time'))[:self._MAX_TRAINS]
+                    station['S'], key=itemgetter('time'),
+                )[:self._MAX_TRAINS]
                 station['N'] = sorted(
-                    station['N'], key=itemgetter('time'))[:self._MAX_TRAINS]
+                    station['N'], key=itemgetter('time'),
+                )[:self._MAX_TRAINS]
             else:
                 station['hasData'] = False
 

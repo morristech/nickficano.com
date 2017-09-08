@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
+
 from flask import jsonify
-from ..helpers import JSONEncoder
+
 from .. import factory
+from ..helpers import JSONEncoder
 
 
 def create_app(settings_override=None, register_security_blueprint=False):

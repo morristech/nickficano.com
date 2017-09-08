@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
-import pkgutil
+
 import importlib
+import pkgutil
 from datetime import datetime
+
 from flask import Blueprint
 from flask.json import JSONEncoder as BaseJSONEncoder
 
@@ -64,6 +66,7 @@ class JSONEncoder(BaseJSONEncoder):
     """Custom :class:`JSONEncoder` which respects objects that include the
     :class:`JsonSerializer` mixin.
     """
+
     def default(self, obj):
         if isinstance(obj, JsonSerializer):
             return obj.to_json()

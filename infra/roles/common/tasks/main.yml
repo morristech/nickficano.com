@@ -23,4 +23,3 @@
   template:
     src: templates/inputrc
     dest: /home/{{ app.deploy_user }}/.inputrc
-
