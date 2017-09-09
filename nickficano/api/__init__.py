@@ -7,7 +7,7 @@ from ..helpers import JSONEncoder
 
 
 def create_app(settings_override=None, register_security_blueprint=False):
-    """Returns the Overholt API application instance"""
+    """Returns the API application instance"""
 
     app = factory.create_app(__name__, __path__, settings_override)
 
@@ -37,12 +37,8 @@ def route(bp, *args, **kwargs):
     return decorator
 
 
-def on_overholt_error(e):
+def on_error(e):
     return jsonify(dict(error=e.msg)), 400
-
-
-def on_overholt_form_error(e):
-    return jsonify(dict(errors=e.errors)), 400
 
 
 def on_404(e):
