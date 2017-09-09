@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
 from functools import wraps
 
 from flask import render_template
-from flask.ext.cdn import CDN
+from flask_cdn import CDN
 
 from . import assets
 from .. import factory

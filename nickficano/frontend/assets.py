@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
-from flask.ext.assets import Bundle
-from flask.ext.assets import Environment
+from flask_assets import Bundle
+from flask_assets import Environment
 
 css_all = Bundle(
     'scss/all.scss',
