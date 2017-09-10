@@ -5,6 +5,7 @@ nickficano.factory
 Implementation of the Flask application factory pattern.
 """
 from typing import Optional
+
 from flask import Flask
 
 from nickficano.lib.blueprints import register_blueprints
@@ -13,7 +14,7 @@ from nickficano.lib.blueprints import register_blueprints
 def create_app(
         package_name: str,
         package_path: str,
-        settings_override: Optional[object] = None
+        settings_override: Optional[object] = None,
 ) -> Flask:
     """Returns a application instance configured with functionality specific to
     the platform.

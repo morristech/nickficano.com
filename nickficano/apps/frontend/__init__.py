@@ -5,12 +5,12 @@ nickficano.apps.frontend
 Frontend application instance using Flask's factory pattern.
 """
 import os
-
 from typing import Optional
+
 from flask import render_template
 
-from nickficano.apps.frontend import assets
 from nickficano import factory
+from nickficano.apps.frontend import assets
 
 
 def create_app(settings_override: Optional[object] = None):
