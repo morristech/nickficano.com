@@ -37,6 +37,24 @@
   tags:
     deploy
 
+- name: install node.js project dependancies
+  become: yes
+  become_user: app
+  command: yarn install
+  args:
+    chdir: /home/{{ app.user }}/{{ app.name }}
+  tags:
+    - deploy
+
+- name: bundle static assets
+  become: yes
+  become_user: app
+  command: yarn run bundle
+  args:
+    chdir: /home/{{ app.user }}/{{ app.name }}
+  tags:
+    - deploy
+
 - name: create directory for letsencrypt auto renewal verification
   file:
     path: /var/www/html/.well-known/acme-challenge

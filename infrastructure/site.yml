@@ -16,6 +16,8 @@
   roles:
     - common
     - ntp
+    - nodejs
+    - yarn
     - nginx
     - python
     - uwsgi
