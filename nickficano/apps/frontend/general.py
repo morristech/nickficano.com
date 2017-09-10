@@ -1,7 +1,6 @@
 from flask import Blueprint
 from flask import current_app as app
 from flask import render_template
-from flask import request
 from flask import send_from_directory
 
 from nickficano.routing import route
@@ -16,9 +15,9 @@ def index():
 
 @route(bp, '/robots.txt')
 def robots():
-    return send_from_directory(app.static_folder, request.path[1:])
+    return send_from_directory(app.static_folder, 'robots.txt')
 
 
 @route(bp, '/sitemap.xml')
 def sitemap():
-    return send_from_directory(app.static_folder, request.path[1:])
+    return send_from_directory(app.static_folder, 'sitemap.xml')
