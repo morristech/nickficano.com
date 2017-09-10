@@ -10,16 +10,18 @@ from typing import Optional
 from flask import render_template
 
 from server import factory
-from server.apps.frontend import assets
 
 
 def create_app(settings_override: Optional[object] = None):
     """Returns the frontend application instance"""
-    path = [os.path.dirname(os.path.abspath(__file__))]
-    app = factory.create_app(__name__, path, settings_override)
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    package_path = [cwd]
 
-    # Init assets
-    assets.init_app(app)
+    app = factory.create_app(
+        __name__,
+        package_path,
+        settings_override,
+    )
 
     # Register custom error handlers
     if not app.debug:

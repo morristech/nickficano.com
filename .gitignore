@@ -4,12 +4,12 @@
 *.pyc
 Icon
 /resources
-server/apps/frontend/static/.webassets-cache/
-server/apps/frontend/static/css/*
 server/overrides.py
 src/static/build
 assets/*
 certs/*
+node_modules/*
+client/static/js/*
 
 # Thumbnails
 ._*

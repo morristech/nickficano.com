@@ -4,6 +4,7 @@ nickficano.factory
 
 Implementation of the Flask application factory pattern.
 """
+import os
 from typing import Optional
 
 from flask import Flask
@@ -26,7 +27,16 @@ def create_app(
     :param settings_override:
         a dictionary of settings to override.
     """
-    app = Flask(package_name, instance_relative_config=True)
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    static_folder = os.path.abspath(
+        os.path.join(cwd, '..', 'client', 'static')
+    )
+    app = Flask(
+        package_name,
+        instance_relative_config=True,
+        static_folder=static_folder,
+        static_url_path='/static',
+    )
 
     # Apply base configuration.
     app.config.from_object('server.config.settings')
