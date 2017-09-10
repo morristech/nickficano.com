@@ -6,8 +6,6 @@ Icon
 /resources
 server/overrides.py
 src/static/build
-assets/*
-certs/*
 node_modules/*
 client/static/js/*
 
