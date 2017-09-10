@@ -4,7 +4,7 @@ from flask import render_template
 from flask import request
 from flask import send_from_directory
 
-from . import route
+from nickficano.routing import route
 
 bp = Blueprint('index', __name__)
 

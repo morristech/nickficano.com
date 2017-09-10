@@ -1,15 +1,16 @@
+import os
 from functools import wraps
 
 from flask import jsonify
 
-from .. import factory
-from ..helpers import JSONEncoder
+from nickficano import factory
+from nickficano.lib.serializers import JSONEncoder
 
 
-def create_app(settings_override=None, register_security_blueprint=False):
+def create_app(settings_override=None):
     """Returns the API application instance"""
-
-    app = factory.create_app(__name__, __path__, settings_override)
+    path = [os.path.dirname(os.path.abspath(__file__))]
+    app = factory.create_app(__name__, path, settings_override)
 
     # Set the default JSON encoder
     app.json_encoder = JSONEncoder
