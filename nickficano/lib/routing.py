@@ -1,6 +1,6 @@
 """
-nickficano.routing
-------------------
+nickficano.lib.routing
+----------------------
 
 This module contains various application routing abstractions.
 """

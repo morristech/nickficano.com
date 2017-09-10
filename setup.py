@@ -13,7 +13,7 @@ setup(
     author_email='nficano@gmail.com',
     version='0.1.0',
     packages=find_packages(exclude=['tests*']),
-    url='http://nickficano.com',
+    url='https://nickficano.com',
     license='Apache License 2.0',
     description='My landing page',
     zip_safe=False,

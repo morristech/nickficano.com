@@ -3,7 +3,7 @@ from flask import current_app as app
 from flask import render_template
 from flask import send_from_directory
 
-from nickficano.routing import route
+from nickficano.lib.routing import route
 
 bp = Blueprint('index', __name__)
 
