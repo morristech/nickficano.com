@@ -4,8 +4,8 @@
 *.pyc
 Icon
 /resources
-nickficano/frontend/static/.webassets-cache/
-nickficano/frontend/static/css/*
+nickficano/apps/frontend/static/.webassets-cache/
+nickficano/apps/frontend/static/css/*
 nickficano/overrides.py
 src/static/build
 assets/*
