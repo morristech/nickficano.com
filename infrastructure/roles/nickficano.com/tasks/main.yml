@@ -26,6 +26,7 @@
     repo: "{{ app.repo_url }}"
     dest: /home/{{ app.user }}/{{ app.name }}
     accept_hostkey: yes
+    force: yes
   tags:
     deploy
 
