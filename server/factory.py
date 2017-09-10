@@ -8,7 +8,7 @@ from typing import Optional
 
 from flask import Flask
 
-from nickficano.lib.blueprints import register_blueprints
+from server.lib.blueprints import register_blueprints
 
 
 def create_app(
@@ -29,7 +29,7 @@ def create_app(
     app = Flask(package_name, instance_relative_config=True)
 
     # Apply base configuration.
-    app.config.from_object('nickficano.config.settings')
+    app.config.from_object('server.config.settings')
 
     # Apply configuration passed down from the app instance.
     app.config.from_object(settings_override)

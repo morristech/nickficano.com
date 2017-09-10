@@ -1,6 +1,6 @@
 from werkzeug.wsgi import DispatcherMiddleware
 
-from nickficano.apps import frontend
+from server.apps import frontend
 
 # This is the entry point for callable or entry point function for uwsgi.
 application = DispatcherMiddleware(

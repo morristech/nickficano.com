@@ -9,8 +9,8 @@ from typing import Optional
 
 from flask import render_template
 
-from nickficano import factory
-from nickficano.apps.frontend import assets
+from server import factory
+from server.apps.frontend import assets
 
 
 def create_app(settings_override: Optional[object] = None):
