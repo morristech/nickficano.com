@@ -7,12 +7,33 @@
   box-sizing: border-box;
 }
 
+.main-title {
+	position: absolute;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate3d(-50%,-50%,0);
+	transform: translate3d(-50%,-50%,0);
+}
+
+.large-header {
+	position: relative;
+	width: 100%;
+	background: #1b1c1d;
+	overflow: hidden;
+	background-size: cover;
+	background-position: center center;
+	z-index: 1;
+}
+
 @include fontFace('BebasNeueRegular','/static/font/BebasNeueRegular');
 $black: #000000;
 $white: #ffffff;
 
 body, html {
-  background-color: $black;
+  background-color: #1b1c1d;
   color: $white;
   font-size: 1em;
   width: 100%;
@@ -43,6 +64,9 @@ body {
 nav {
   font-family: "BebasNeueRegular";
   display: block;
+  li {
+    margin-bottom: .5em;
+  }
   ul {
     font-weight: bold;
     letter-spacing: 0.1em;
@@ -67,9 +91,8 @@ nav {
 }
 
 .square {
-  background-color: #000000;
   border-radius: 2px;
-  border: 1px solid #7f7f7f;
+  border: none;
   display: inline-block;
   letter-spacing: 0.15em;
   margin-top: 30px;
