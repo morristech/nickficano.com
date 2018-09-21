@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-@include fontFace('BebasNeueRegular','../../font/BebasNeueRegular');
+@include fontFace('BebasNeueRegular', '/static/font/BebasNeueRegular');
 $black: #000000;
 $white: #ffffff;
 
