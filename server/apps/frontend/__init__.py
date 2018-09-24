@@ -10,6 +10,7 @@ from typing import Optional
 from flask import render_template
 
 from server import factory
+from server.lib.manifest import get_webpack_manifest
 
 
 def create_app(settings_override: Optional[object] = None):
@@ -22,6 +23,7 @@ def create_app(settings_override: Optional[object] = None):
         package_path,
         settings_override,
     )
+    setup_jinja_env(app)
 
     # Register custom error handlers
     if not app.debug:
@@ -30,6 +32,9 @@ def create_app(settings_override: Optional[object] = None):
 
     return app
 
+
+def setup_jinja_env(app):
+    app.jinja_env.globals['manifest'] = get_webpack_manifest()
 
 def handle_error(e):
     return render_template('errors/%s.html' % e.code), e.code

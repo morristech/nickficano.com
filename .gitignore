@@ -8,6 +8,7 @@ server/overrides.py
 src/static/build
 node_modules/*
 client/static/js/*
+client/static/css/*
 
 # Thumbnails
 ._*
