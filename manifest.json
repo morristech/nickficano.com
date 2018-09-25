@@ -1,4 +1,6 @@
 {
-  "main.css": "/client/static/css/main.1c870f5b5d15ba736aea.css",
-  "main.js": "/client/static/js/bundle.1c870f5b5d15ba736aea.js"
+  "main.css": "/../client/static/css/main.0d1ffca3ff41377ed740.css",
+  "main.js": "/../client/static/js/bundle.0d1ffca3ff41377ed740.js",
+  "main.css.map": "/../client/static/css/main.0d1ffca3ff41377ed740.css.map",
+  "main.js.map": "/../client/static/js/bundle.0d1ffca3ff41377ed740.js.map"
 }
