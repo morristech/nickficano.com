@@ -108,6 +108,14 @@
     state: directory
     mode: 0755
 
+- name: create directory for uwsgi log
+  file:
+    owner: "{{ app.user }}"
+    group: "{{ app.group }}"
+    path: /var/log/uwsgi
+    state: directory
+    mode: 0755
+
 - name: write uwsgi configuration
   template:
     src: templates/uwsgi.ini
