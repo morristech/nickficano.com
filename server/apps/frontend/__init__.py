@@ -34,6 +34,7 @@ def create_app(settings_override: Optional[object] = None):
 
 
 def setup_jinja_env(app):
+    app.jinja_env.add_extension('server.lib.jinja2.HTMLCompress')
     app.jinja_env.globals['manifest'] = get_webpack_manifest()
 
 def handle_error(e):
