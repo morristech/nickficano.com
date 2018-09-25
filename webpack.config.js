@@ -6,7 +6,7 @@ const parts = require('./webpack/webpack.parts');
 module.exports = merge([
   {
     mode: 'production',
-    devtool: 'source-map',
+    devtool: 'none',
     entry: [
       `${__dirname}/client/index`,
     ],
