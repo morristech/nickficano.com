@@ -130,13 +130,13 @@
   notify:
     - restart app process
 
-  - name: restart uWSGI process
-    supervisorctl:
-      name: nf_www
-      state: restarted
-    become: yes
-    tags:
-      - deploy
+- name: restart uWSGI process
+  supervisorctl:
+    name: nf_uwsgi
+    state: restarted
+  become: yes
+  tags:
+    - deploy
 
 - name: write nginx site configuration
   template:

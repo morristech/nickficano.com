@@ -1,8 +1,8 @@
 {
   "name": "nickficano.com",
   "scripts": {
-    "bundle": "webpack --config=webpack/webpack.config.js",
-    "start": "webpack --watch --config webpack/webpack.config.js"
+    "bundle": "webpack --config=webpack.config.js",
+    "start": "webpack --watch --config webpack.config.js"
   },
   "license": "UNLICENSED",
   "author": "Nick Ficano <nficano@gmail.com>",

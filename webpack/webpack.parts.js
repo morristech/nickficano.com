@@ -2,7 +2,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 exports.createManifest = (filename) => ({
   plugins: [
     new ManifestPlugin({
-      filename: `../${filename}`,
+      filename: filename,
       publicPath: '/',
     }),
   ],
@@ -24,8 +24,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 exports.bundleCSS = ({ include, exclude } = {}) => ({
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '../client/static/css/[name].[hash].css',
-      chunkFilename: '../client/static/css/[id].[hash].css',
+      filename: 'client/static/css/[name].[hash].css',
+      chunkFilename: 'client/static/css/[id].[hash].css',
     }),      
   ],  
   module: {
@@ -52,8 +52,8 @@ exports.bundleCSS = ({ include, exclude } = {}) => ({
 exports.bundleSCSS = ({ include, exclude } = {}) => ({
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '../client/static/css/[name].[hash].css',
-      chunkFilename: '../client/static/css/[id].[hash].css',
+      filename: 'client/static/css/[name].[hash].css',
+      chunkFilename: 'client/static/css/[id].[hash].css',
     }),      
   ],  
   module: {
