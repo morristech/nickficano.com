@@ -10,7 +10,8 @@ from typing import Optional
 from flask import render_template
 
 from server import factory
-from server.lib.manifest import get_webpack_manifest
+from server.lib.static import get_webpack_manifest
+from server.lib.static import get_raw_static_asset
 
 
 def create_app(settings_override: Optional[object] = None):
@@ -38,6 +39,8 @@ def setup_jinja_env(app):
     app.jinja_env.lstrip_blocks = True
     app.jinja_env.add_extension('server.lib.jinja2.HTMLCompress')
     app.jinja_env.globals['manifest'] = get_webpack_manifest()
+    app.jinja_env.globals['raw_static_asset'] = get_raw_static_asset
+
 
 def handle_error(e):
     return render_template('errors/%s.html' % e.code), e.code
