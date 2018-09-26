@@ -18,7 +18,7 @@
   <body>
     {%- block content %}{% endblock %}
     <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-13233758-1', 'auto');ga('send', 'pageview');</script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script async src='{{ url_for('static', filename='js/analytics.js') }}'></script>
     <script src="{{ url_for('static', filename='js/' + manifest['main.js']) }}"></script>
   </body>
 </html>
