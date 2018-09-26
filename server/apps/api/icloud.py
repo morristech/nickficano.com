@@ -1,8 +1,10 @@
-from server.core import api
 from flask_restful import reqparse
 from flask_restful import Resource
 from pyicloud import PyiCloudService
 from pyicloud.exceptions import PyiCloudFailedLoginException
+
+from server.core import api
+
 
 @api.resource('/icloud/fmi')
 class FindMyIphone(Resource):
@@ -11,7 +13,7 @@ class FindMyIphone(Resource):
             data = device.data
             if all([
                 data['deviceClass'] == 'iPhone',
-                data['isLocating'] is True
+                data['isLocating'] is True,
             ]):
                 yield device
 

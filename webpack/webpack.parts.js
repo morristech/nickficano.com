@@ -13,7 +13,7 @@ exports.minifyJS = () => ({
   optimization: {
     minimizer: [
       new UglifyWebpackPlugin({
-        sourceMap: true, 
+        sourceMap: true,
         extractComments: true,
       }),
     ]
@@ -26,8 +26,8 @@ exports.bundleCSS = ({ include, exclude } = {}) => ({
     new MiniCssExtractPlugin({
       filename: 'client/static/css/[name].[hash].css',
       chunkFilename: 'client/static/css/[id].[hash].css',
-    }),      
-  ],  
+    }),
+  ],
   module: {
     rules: [
       {
@@ -46,7 +46,7 @@ exports.bundleCSS = ({ include, exclude } = {}) => ({
         ],
       },
     ]
-  }  
+  }
 });
 
 exports.bundleSCSS = ({ include, exclude } = {}) => ({
@@ -54,8 +54,8 @@ exports.bundleSCSS = ({ include, exclude } = {}) => ({
     new MiniCssExtractPlugin({
       filename: 'client/static/css/[name].[hash].css',
       chunkFilename: 'client/static/css/[id].[hash].css',
-    }),      
-  ],  
+    }),
+  ],
   module: {
     rules: [
       {
@@ -83,5 +83,5 @@ exports.bundleSCSS = ({ include, exclude } = {}) => ({
         ],
       },
     ]
-  }  
+  }
 });

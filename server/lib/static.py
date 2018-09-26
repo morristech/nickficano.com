@@ -1,6 +1,8 @@
-import os
 import json
+import os
+
 import server
+
 
 def get_webpack_manifest():
     fp = os.path.join(os.path.dirname(server.__file__), '..', 'manifest.json')

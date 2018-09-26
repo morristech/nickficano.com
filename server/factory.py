@@ -29,7 +29,7 @@ def create_app(
     """
     cwd = os.path.dirname(os.path.abspath(__file__))
     static_folder = os.path.abspath(
-        os.path.join(cwd, '..', 'client', 'static')
+        os.path.join(cwd, '..', 'client', 'static'),
     )
     app = Flask(
         package_name,

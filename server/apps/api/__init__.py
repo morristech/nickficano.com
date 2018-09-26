@@ -9,7 +9,6 @@ from typing import Optional
 
 import simplejson as json
 from flask import make_response
-from flask_restful import Resource
 
 from server import factory
 from server.core import api

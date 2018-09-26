@@ -4,10 +4,10 @@ import { Circ } from "gsap/EasePack";
 let width;
 let height;
 let largeHeader;
-let canvas; 
-let ctx; 
+let canvas;
+let ctx;
 let points;
-let target; 
+let target;
 let animateHeader = true;
 
 function initHeader() {

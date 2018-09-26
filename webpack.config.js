@@ -15,7 +15,7 @@ module.exports = merge([
       filename: `client/static/js/bundle.[hash].js`,
       publicPath: '/static/'
     },
-  },  
+  },
   parts.createManifest('manifest.json'),
   parts.bundleCSS(),
   parts.bundleSCSS(),
