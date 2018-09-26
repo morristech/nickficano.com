@@ -10,15 +10,23 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Nick Ficano — NYC Full Stack Developer</title>
     <link rel="icon" href="/static/images/favicon.ico">
+    {% if config.DEBUG %}
+    <link rel="stylesheet" type="text/css" href="{{- url_for('static', filename='css/' + static_assets['main.css']['filename']) -}}">
+    {% else %}
+    <style type="text/css">{{- static_assets['main.css']['raw'] -}}</style>
+    {% endif %}
     <link type="font/ttf" href="{{ url_for('static', filename='font/BebasNeueRegular.ttf') }}" crossorigin>
     <link type="font/woff" href="{{ url_for('static', filename='font/BebasNeueRegular.woff') }}" crossorigin>
     <link type="font/woff2" href="{{ url_for('static', filename='font/BebasNeueRegular.woff2') }}" crossorigin>
-    <style type="text/css">{{- raw_static_asset('main.css') -}}</style>
   </head>
   <body>
     {%- block content %}{% endblock %}
     <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-13233758-1', 'auto');ga('send', 'pageview');</script>
     <script defer src='{{ url_for('static', filename='js/analytics.js') }}'></script>
-    <script defer>{{- raw_static_asset('main.js') -}}</script>
+    {% if config.DEBUG %}
+    <script defer src='{{ url_for('static', filename='js/' + static_assets['main.js']['filename']) }}'></script>
+    {% else %}
+    <script defer>{{- static_assets['main.css']['raw'] -}}</script>
+    {% endif %}
   </body>
 </html>
