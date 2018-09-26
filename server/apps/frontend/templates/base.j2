@@ -13,7 +13,9 @@
     <link type="font/ttf" href="{{ url_for('static', filename='font/BebasNeueRegular.ttf') }}" crossorigin>
     <link type="font/woff" href="{{ url_for('static', filename='font/BebasNeueRegular.woff') }}" crossorigin>
     <link type="font/woff2" href="{{ url_for('static', filename='font/BebasNeueRegular.woff2') }}" crossorigin>
+    <noscript>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/' + manifest['main.css']) }}">
+    </noscript>
   </head>
   <body>
     {%- block content %}{% endblock %}
