@@ -8,6 +8,7 @@
   "author": "Nick Ficano <nficano@gmail.com>",
   "dependencies": {
     "css-loader": "^0.28.7",
+    "d3": "^5.7.0",
     "gsap": "^2.0.1",
     "mini-css-extract-plugin": "^0.4.3",
     "node-sass": "^4.5.3",

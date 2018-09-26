@@ -13,6 +13,11 @@ def index():
     return render_template('index.j2')
 
 
+@route(bp, '/graph')
+def graph():
+    return render_template('graph.j2')
+
+
 @route(bp, '/robots.txt')
 def robots():
     return send_from_directory(app.static_folder, 'robots.txt')
