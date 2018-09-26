@@ -146,4 +146,5 @@
   notify:
     - reload nginx
   tags:
-    deploy
+    - deploy
+    - nginx
