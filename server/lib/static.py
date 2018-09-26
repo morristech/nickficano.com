@@ -28,6 +28,6 @@ def get_static_assets():
     return {
         k: {
             'filename': v,
-            'raw': load_file(k)
+            'raw': load_file(k),
         } for k, v in read_manifest().items()
     }
