@@ -39,7 +39,8 @@ def setup_jinja_env(app):
     app.jinja_env.globals['static_assets'] = get_static_assets()
     if not app.debug:
         app.jinja_env.add_extension(
-            'server.lib.jinja2_html_minifier.HTMLCompress')
+            'server.lib.jinja2_html_minifier.HTMLCompress',
+        )
 
 
 def handle_error(e):
