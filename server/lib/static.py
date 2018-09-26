@@ -4,18 +4,30 @@ import os
 import server
 
 
-def get_webpack_manifest():
-    fp = os.path.join(os.path.dirname(server.__file__), '..', 'manifest.json')
+def read_manifest():
+    dirname = os.path.dirname(server.__file__)
+    fp = os.path.join(dirname, '..', 'manifest.json')
     with open(fp) as fh:
-        manifest = json.loads(fh.read())
-        return {k: os.path.basename(v) for k, v in manifest.items()}
+        return {
+            k: os.path.basename(v)
+            for k, v in json.loads(fh.read()).items()
+        }
 
 
-def get_raw_static_asset(name):
+def load_file(name):
     basename, ext = name.split('.')
-    manifest = get_webpack_manifest()
+    manifest = read_manifest()
     static_asset = manifest[name]
     dirname = os.path.dirname(server.__file__)
     fp = os.path.join(dirname, '..', 'client', 'static', ext, static_asset)
     with open(fp) as fh:
         return fh.read().strip()
+
+
+def get_static_assets():
+    return {
+        k: {
+            'filename': v,
+            'raw': load_file(k)
+        } for k, v in read_manifest().items()
+    }

@@ -9,6 +9,7 @@ src/static/build
 node_modules/*
 client/static/js/bundle*
 client/static/css/*
+instance/overrides.py
 
 # Thumbnails
 ._*
