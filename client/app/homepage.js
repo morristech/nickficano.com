@@ -1,174 +1,63 @@
-import { TweenLite } from "gsap/TweenLite";
-import { Circ } from "gsap/EasePack";
+const d3 = require('d3');
+var margin = {
+  top: 50,
+  right: 50, 
+  bottom: 50, 
+  left: 50
+};
 
-let width;
-let height;
-let largeHeader;
-let canvas;
-let ctx;
-let points;
-let target;
-let animateHeader = true;
+var width = window.innerWidth - margin.left - margin.right;
+var height = window.innerHeight - margin.top - margin.bottom;
+var n = 60;
 
-function initHeader() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    target = {x: width/2, y: height/2};
+var xScale = d3.scaleLinear()
+    .domain([0, n-1])
+    .range([0, width]);
+    
+var yScale = d3.scaleLinear()
+    .domain([0, 1])
+    .range([height, 0]);
+    
+var line = d3.line()
+    .x(function(d, i) { return xScale(i); })
+    .y(function(d) { return yScale(d.y); })
+    .curve(d3.curveMonotoneX);
+    
+var dataset = d3.range(n).map(function(d) { return {"y": d3.randomUniform(1)() }; });
 
-    largeHeader = document.getElementById('large-header');
-    largeHeader.style.height = `${height}px`;
+var svg = d3
+    .select("body")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
 
-    canvas = document.getElementById('demo-canvas');
-    canvas.width = width;
-    canvas.height = height;
-    ctx = canvas.getContext('2d');
 
-    // create points
-    points = [];
-    for(let x = 0; x < width; x = x + width/15) {
-        for(let y = 0; y < height; y = y + height/15) {
-            const px = x + Math.random()*width/15;
-            const py = y + Math.random()*height/15;
-            const p = {x: px, originX: px, y: py, originY: py };
-            points.push(p);
-        }
-    }
+const init = () => {
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xScale));
+      
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(d3.axisLeft(yScale));
+      
+  svg.append("path")
+      .datum(dataset)
+      .attr("class", "line")
+      .attr("d", line);
+      
+  svg.selectAll(".dot")
+      .data(dataset)
+      .enter()
+      .attr("cx", function(d, i) { return xScale(i); })
+      .attr("cy", function(d) { return yScale(d.y); })
+      .attr("r", 5);  
+};   
 
-    // for each point find the 5 closest points
-    for(var i = 0; i < points.length; i++) {
-        const closest = [];
-        const p1 = points[i];
-        for(let j = 0; j < points.length; j++) {
-            const p2 = points[j];
-            if(!(p1 == p2)) {
-                let placed = false;
-                for(var k = 0; k < 5; k++) {
-                    if(!placed) {
-                        if(closest[k] == undefined) {
-                            closest[k] = p2;
-                            placed = true;
-                        }
-                    }
-                }
-
-                for(var k = 0; k < 5; k++) {
-                    if(!placed) {
-                        if(getDistance(p1, p2) < getDistance(p1, closest[k])) {
-                            closest[k] = p2;
-                            placed = true;
-                        }
-                    }
-                }
-            }
-        }
-        p1.closest = closest;
-    }
-
-    // assign a circle to each point
-    for(var i in points) {
-        const c = new Circle(points[i], 2+Math.random()*2, 'rgba(255,255,255,0.3)');
-        points[i].circle = c;
-    }
-}
-
-// Event handling
-function addListeners() {
-    window.addEventListener('scroll', scrollCheck);
-    window.addEventListener('resize', resize);
-}
-function scrollCheck() {
-    if(document.body.scrollTop > height) {animateHeader = false;}
-    else {animateHeader = true;}
-}
-
-function resize() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    largeHeader.style.height = `${height}px`;
-    canvas.width = width;
-    canvas.height = height;
-}
-
-// animation
-function initAnimation() {
-    animate();
-    for(const i in points) {
-        shiftPoint(points[i]);
-    }
-}
-
-function animate() {
-    if(animateHeader) {
-        ctx.clearRect(0,0,width,height);
-        for(const i in points) {
-            // detect points in range
-            if(Math.abs(getDistance(target, points[i])) < 4000) {
-                points[i].active = 0.3;
-                points[i].circle.active = 0.6;
-            } else if(Math.abs(getDistance(target, points[i])) < 20000) {
-                points[i].active = 0.1;
-                points[i].circle.active = 0.3;
-            } else if(Math.abs(getDistance(target, points[i])) < 40000) {
-                points[i].active = 0.02;
-                points[i].circle.active = 0.1;
-            } else {
-                points[i].active = 0;
-                points[i].circle.active = 0;
-            }
-
-            drawLines(points[i]);
-            points[i].circle.draw();
-        }
-    }
-    requestAnimationFrame(animate);
-}
-
-function shiftPoint(p) {
-    TweenLite.to(p, 1+1*Math.random(), {x:p.originX-50+Math.random()*100,
-        y: p.originY-50+Math.random()*100, ease:Circ.easeInOut,
-        onComplete() {
-            shiftPoint(p);
-        }});
-}
-
-// Canvas manipulation
-function drawLines(p) {
-    if(!p.active) {return;}
-    for(const i in p.closest) {
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.closest[i].x, p.closest[i].y);
-        ctx.strokeStyle = `rgba(255,255,255,${ p.active /2})`;
-        ctx.stroke();
-    }
-}
-
-function Circle(pos,rad,color) {
-    const _this = this;
-
-    // constructor
-    (function() {
-        _this.pos = pos || null;
-        _this.radius = rad || null;
-        _this.color = color || null;
-    })();
-
-    this.draw = function() {
-        if(!_this.active) {return;}
-        ctx.beginPath();
-        ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
-        ctx.fillStyle = `rgba(255,255,255,${ _this.active})`;
-        ctx.fill();
-    };
-}
-
-// Util
-function getDistance(p1, p2) {
-    return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
-}
-
-export default function init() {
-  initHeader();
-  initAnimation();
-  addListeners();
-}
+module.exports = {
+  init,
+};

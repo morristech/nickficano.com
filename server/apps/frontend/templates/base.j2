@@ -11,7 +11,7 @@
     <title>Nick Ficano — NYC Full Stack Developer</title>
     <link rel="icon" href="/static/images/favicon.ico">
     {% if config.DEBUG %}
-    <link rel="stylesheet" type="text/css" href="{{- url_for('static', filename='css/' + static_assets['main.css']['filename']) -}}">
+    <link rel="stylesheet" type="text/css" href="/static/client/static/css/main.css">
     {% else %}
     <style type="text/css">{{- static_assets['main.css']['raw'] -}}</style>
     {% endif %}
@@ -24,7 +24,7 @@
     <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create', 'UA-13233758-1', 'auto');ga('send', 'pageview');</script>
     <script defer src='{{ url_for('static', filename='js/analytics.js') }}'></script>
     {% if config.DEBUG %}
-    <script defer src='{{ url_for('static', filename='js/' + static_assets['main.js']['filename']) }}'></script>
+    <script defer src="/static/client/static/js/bundle.js"></script>
     {% else %}
     <script defer>{{- static_assets['main.css']['raw'] -}}</script>
     {% endif %}

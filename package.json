@@ -2,19 +2,24 @@
   "name": "nickficano.com",
   "scripts": {
     "bundle": "webpack --config=webpack.config.js",
-    "start": "webpack --watch --config webpack.config.js"
+    "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --mode development\""
   },
   "license": "UNLICENSED",
   "author": "Nick Ficano <nficano@gmail.com>",
   "dependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.2",
     "css-loader": "^0.28.7",
     "d3": "^5.7.0",
     "gsap": "^2.0.1",
     "mini-css-extract-plugin": "^0.4.3",
     "node-sass": "^4.5.3",
+    "nodemon": "^1.18.4",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
-    "webpack": "^4.19.1",
+    "webpack": "^4.20.2",
+    "webpack-dev-server": "^3.1.9",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.1.4"
   },

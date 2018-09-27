@@ -18,7 +18,7 @@ def cli():
 
 @click.command()
 @click.option('--port', default=5000, help='The server port number')
-@click.option('--hostname', default='localhost', help='The server hostname')
+@click.option('--hostname', default='0.0.0.0', help='The server hostname')
 def runserver(hostname: str, port: int):
     run_simple(hostname, port, app, use_reloader=True, use_debugger=True)
 

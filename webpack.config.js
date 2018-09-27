@@ -6,7 +6,7 @@ const parts = require('./webpack/webpack.parts');
 module.exports = merge([
   {
     mode: 'production',
-    devtool: false,
+    devtool: 'inline-source-map',
     entry: [
       `${__dirname}/client/index`,
     ],
@@ -20,4 +20,6 @@ module.exports = merge([
   parts.bundleCSS(),
   parts.bundleSCSS(),
   parts.minifyJS(),
+  parts.transpileJS(),
+  parts.devServer('0.0.0.0', 5001),
 ]);
