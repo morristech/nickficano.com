@@ -76,10 +76,10 @@ function realTimeLineChart() {
           y = d3.scaleLinear().rangeRound([height-margin.top-margin.bottom, 0]),
           z = d3.scaleOrdinal(color);
 
-      var xMin = d3.min(data, function(c) { 
+      var xMin = d3.min(data, function(c) {
         return d3.min(c.values, function(d) { return d.time; });
       });
-      
+
       var xMax = new Date(new Date(d3.max(data, function(c) {
         return d3.max(c.values, function(d) { return d.time; });
       })).getTime() - (duration*2));
@@ -198,7 +198,7 @@ function realTimeLineChart() {
 
 const init = () => {
 
-};   
+};
 
 module.exports = {
 init,
