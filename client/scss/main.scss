@@ -32,8 +32,6 @@ $light-gray: #7F7F7F;
   }
 }
 body {
-  background: $black;
-  color: $white;
   font-size: 1em;
   overflow-x: hidden;
   line-height: 1.42857;
@@ -42,7 +40,12 @@ body {
   font-family: 'BebasNeueRegular', Helvetica, Arial, sans-serif;
 }
 
-.wrapper {
+.fullbleed-black {
+  background: $black;
+  color: $white;
+}
+
+.fullbleed {
   overflow-x: hidden;
   position: relative;
   height: 100vh;
